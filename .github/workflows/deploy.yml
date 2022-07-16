@@ -1,0 +1,29 @@
+name: acesso remoto
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Qual a versão?'
+        required: false
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Executando comandos por SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        password: ${{ secrets.PASSWORD }}
+        port: 22
+        script: |
+          cd teste-nodejs
+          git pull
+          npm install
+          pm2 restart all
