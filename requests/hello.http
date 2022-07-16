@@ -1,0 +1,1 @@
+GET http://node.hinale.koud.dev:3000/hello HTTP/1.1

@@ -23,7 +23,24 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: 22
         script: |
+          echo .
+          echo .
+          echo .
+          echo COMEÇANDO DEPLOY
+          echo .
+          echo .
+          ls
+          echo .
+          echo .
           cd teste-nodejs
+          echo .
+          echo .
           git pull
+          echo .
+          echo .
           npm install
+          echo .
+          echo .
           pm2 restart all
+          echo .
+          echo .
