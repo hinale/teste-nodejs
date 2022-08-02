@@ -1,62 +1,47 @@
-const express = require('express');
+import express from 'express'
+import path from 'path'
+import bodyParser from 'body-parser'
+import Calculadora from './modules/Calculadora.js';
+import { fileURLToPath } from 'url';
+
 const app = express();
-const path = require('path');
-const router = express.Router();
-const bodyParser = require('body-parser');
-// faz a leitura do body
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.post('/resultado', urlencodedParser, (req, res) => {
+var jsonParser = bodyParser.json()
 
-  var num1 = parseInt(req.body.num1);
-  var num2 = parseInt(req.body.num2);
+app.get('/status', (req, res) => {
+  res.status(200).send('OK')
+})
 
-  var sum = num1 + num2;
-  var div = num1 / num2;
-  var sub = num1 - num2;
-  var mul = num1 * num2;
+app.post('/calculadora', jsonParser, (req, res) => {
+  // ENTRADA DE DADOS
+  const
+    num1 = +req.body.num1,
+    num2 = +req.body.num2,
+    operacao = req.body.operacao,
 
-  if (isNaN(num1) || isNaN(num2)) {
-    res.statusCode = 400;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Erro: Preencha todos os campos com numeros');
-  }
+    // VALIDAÇÃO DE DADOS
+    // Essa etapa foi delegada à classe especialista Calculadora
 
-  if (req.body.operacao == 'sum') {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Soma igual a : ' + sum.toString());
-  }
+    // PROCESSAMENTO DOS DADOS
+    funcaoCalculo = Calculadora[operacao],
+    calculo = funcaoCalculo ? funcaoCalculo(num1, num2) : { success: false, erro: "Operação inválida" },
+    mensagem = calculo.success ? "" + calculo.resultado : "ERRO: " + calculo.erro
 
-  if (req.body.operacao == 'sub') {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Subtracao igual a : ' + sub.toString());
-  }
-
-  if (req.body.operacao == 'mul') {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Multiplicacao igual a: ' + mul.toString());
-  }
-
-  if (req.body.operacao == 'div') {
-    if (num2 == 0) {
-      res.statusCode = 400;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end('Erro: Nao e possivel dividir por 0');
-    } else {
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end('Divisao igual a: ' + div.toString());
-    }
-  }
+  // SAIDA DE DADOS
+  res
+    .status(calculo.success ? 200 : 400)
+    .setHeader('Content-Type', 'text/plain')
+    .end(mensagem)
 
 });
 
 app.use('/', (req, res) => {
+  const
+    __filename = fileURLToPath(import.meta.url),
+    __dirname = path.dirname(__filename)
+
   res.statusCode = 200;
-  res.sendFile(path.join(__dirname + '/' + 'calculadora.html'));
+  res.sendFile(path.join(__dirname + '/calculadora.html'));
 });
 
 app.listen(process.env.PORT || 3000, () => {
