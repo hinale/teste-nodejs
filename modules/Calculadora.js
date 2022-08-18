@@ -2,6 +2,7 @@ export default class Calculadora {
 	static validar (num1, num2) {
 		const a = +num1
 		const b = +num2
+		console.log(a, b)
 
 		if (isNaN(a) || isNaN(b)) return [null, null]
 		return [a, b]

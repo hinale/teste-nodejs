@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+  <script>
+    async function coletarDados () {
+      const
+        cepRaw = document.getElementById('cep').value,
+        cep = cepRaw.replace(/\D/g, ''),
+        url = `http://localhost:3000/endereco/${cep}`,
+        resposta = await fetch(url),
+        dados = await resposta.json()
+      console.log(dados.status)
+
+      if (dados.status !== 200) {
+        alert('CEP não encontrado')
+        return
+      } else {
+        document.getElementById('estado').value = dados.state
+        document.getElementById('cidade').value = dados.city
+        document.getElementById('bairro').value = dados.neighborhood
+        document.getElementById('rua').value = dados.street
+        document.getElementById('numero').focus()
+      }
+    }
+  </script>
+
+  <title>Endereço</title>
+</head>
+
+<body>
+
+  <form style="width: 50%;">
+    <div style="margin-bottom: 1em;" class="form-group">
+      <label for="cep">CEP:</label>
+      <input type="text" class="form-control" id="cep" placeholder="Digite seu CEP">
+    </div>
+    <button style="margin-bottom: 1em;" type="button" class="btn btn-primary" onclick="coletarDados()">Buscar</button>
+
+    <div style="margin-bottom: 1em;" class="form-group">
+      <label for="estado">Estado:</label>
+      <input type="text" class="form-control" id="estado" placeholder="Digite seu Estado">
+    </div>
+    <div style="margin-bottom: 1em;" class="form-group">
+      <label for="cidade">Cidade:</label>
+      <input type="text" class="form-control" id="cidade" placeholder="Digite sua Cidade">
+    </div>
+    <div style="margin-bottom: 1em;" class="form-group">
+      <label for="bairro">Bairro:</label>
+      <input type="text" class="form-control" id="bairro" placeholder="Digite seu Bairro">
+    </div>
+    <div style="margin-bottom: 1em;" class="form-group">
+      <label for="rua">Rua:</label>
+      <input type="text" class="form-control" id="rua" placeholder="Digite sua Rua">
+    </div>
+    <div style="margin-bottom: 1em;" class="form-group">
+      <label for="numero">Número:</label>
+      <input type="text" class="form-control" id="numero" placeholder="Digite seu Número">
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+
+</body>
+
+</html>
