@@ -1,13 +1,11 @@
-## Comandos para iniciar servidor
+# Comandos para iniciar servidor
 
 * ~node index.js~
 * npm run dev
 
-## Exercícios de NodeJS
+# Exercícios de NodeJS
 
-### Exercício I
-
-───
+## Exercício I
 
 Criar um endpoint /calculadora, que recebe via método POST os parâmetros: 
 numero1 = valor numérico qualquer, positivo ou negativo
@@ -22,15 +20,11 @@ Se os dados vierem válidos, deve retornar status 200 e no corpo da resposta um 
 O código deve ser mostrado na branch "exercicio-1" e deve ser criada pull request para a main.
 Somente depois de aprovado o código a gnt testa junto fazendo o merge e verificando se foi publicada corretamente.
 
-───
-
 #### Dicas:
 
 * node_modules é um arquivo que não deve ir para o push, deve ser adicionado no `.gitignore`
 
-### Exercício II
-
-───
+## Exercício II
 
 Fazer uma nova tela endereco.html
 Todas as telas precisam ficar dentro de uma pasta /pages, porém, pra acessar o link tem que ser via nome apenas, sem o /pages
@@ -51,8 +45,6 @@ Depois disso, ao receber os dados (rua, bairro, etc) preenche eles nos campos
 Os dados que não vierem pode deixar em branco.
 
 Depois de consultar o CEP, é importante "jogar" o usuário para o campo de número, ou seja, dar o .focus no campo de número do endereço.
-
-───
 
 #### Dicas:
 
@@ -85,9 +77,7 @@ PS: Await só pode ser usado dentro de funções que sejam async functions
 
 - No caso do exercício `endereço/:cep` (dois pontos indicam parâmetro) e requisição `const cep = req.params.cep`
 
-### Exercício III
-
-───
+## Exercício III
 
 Criar uma nova pagina HTML calculoFrete.html
 
@@ -103,6 +93,3 @@ Criar o endpoint /pacote que usa o método POST.
 Por enquanto, recebe os dados na post e dá console.log nos dados do pacote.
 
 Usar bootstrap para os inputs.
-
-───
-
