@@ -8,6 +8,7 @@
 ### Exercício I
 
 ───
+
 Criar um endpoint /calculadora, que recebe via método POST os parâmetros: 
 numero1 = valor numérico qualquer, positivo ou negativo
 numero2 = valor numérico diferente de zero
@@ -20,6 +21,7 @@ Se os dados vierem válidos, deve retornar status 200 e no corpo da resposta um 
 
 O código deve ser mostrado na branch "exercicio-1" e deve ser criada pull request para a main.
 Somente depois de aprovado o código a gnt testa junto fazendo o merge e verificando se foi publicada corretamente.
+
 ───
 
 #### Dicas:
@@ -29,6 +31,7 @@ Somente depois de aprovado o código a gnt testa junto fazendo o merge e verific
 ### Exercício II
 
 ───
+
 Fazer uma nova tela endereco.html
 Todas as telas precisam ficar dentro de uma pasta /pages, porém, pra acessar o link tem que ser via nome apenas, sem o /pages
 Exemplo: A calculadora fica localhost:3000/calculadora, a pagina de endereço fica localhost:3000/endereco.
@@ -48,6 +51,7 @@ Depois disso, ao receber os dados (rua, bairro, etc) preenche eles nos campos
 Os dados que não vierem pode deixar em branco.
 
 Depois de consultar o CEP, é importante "jogar" o usuário para o campo de número, ou seja, dar o .focus no campo de número do endereço.
+
 ───
 
 #### Dicas:
@@ -84,6 +88,7 @@ PS: Await só pode ser usado dentro de funções que sejam async functions
 ### Exercício III
 
 ───
+
 Criar uma nova pagina HTML calculoFrete.html
 
 Ela precisa ter os seguintes campos: 
@@ -94,9 +99,10 @@ Ela precisa ter os seguintes campos:
 - CEP Origem
 - CEP Destino
 
-Criar o endpoint /pacote que usa o método POST
-Por enquanto, recebe os dados na post e dá console.log nos dados do pacote
+Criar o endpoint /pacote que usa o método POST.
+Por enquanto, recebe os dados na post e dá console.log nos dados do pacote.
 
-Usar bootstrap para os inputs
+Usar bootstrap para os inputs.
+
 ───
 
