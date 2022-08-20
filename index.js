@@ -8,12 +8,14 @@ import axios from 'axios';
 const app = express();
 var jsonParser = bodyParser.json()
 
+// localhost:3000
 app.listen(process.env.PORT || 3000, () => {
   console.log('--------------------------------');
   console.log('Servidor rodando na porta 3000');
   console.log('--------------------------------');
 });
 
+// CALCULADORA
 app.use('/calculadora', (req, res) => {
   const
     __filename = fileURLToPath(import.meta.url),
@@ -23,7 +25,7 @@ app.use('/calculadora', (req, res) => {
   res.sendFile(path.join(__dirname + '/pages/calculadora.html'));
 });
 
-app.post('/calculadora', jsonParser, (req, res) => {
+app.post('/resultado', jsonParser, (req, res) => {
   // ENTRADA DE DADOS
   const
     num1 = +req.body.num1,
@@ -48,7 +50,9 @@ app.post('/calculadora', jsonParser, (req, res) => {
 
 });
 
-app.get('/', (req, res) => {
+
+// ENDEREÇO
+app.get('/endereco', (req, res) => {
   const
     __filename = fileURLToPath(import.meta.url),
     __dirname = path.dirname(__filename)
@@ -67,3 +71,30 @@ app.get('/endereco/:cep', jsonParser, (req, res) => {
     res.status(400).json(erro)
   })
 });
+
+// CÁLCULO DE FRETE
+app.get('/', (req, res) => {
+  const
+    __filename = fileURLToPath(import.meta.url),
+    __dirname = path.dirname(__filename)
+
+  res.statusCode = 200;
+  res.sendFile(path.join(__dirname + '/pages/calculoFrete.html'));
+})
+
+app.post('/frete', jsonParser, (req, res) => {
+  const
+    altura = req.body.altura,
+    largura = req.body.largura,
+    profundidade = req.body.profundidade,
+    peso = req.body.peso,
+    origem = req.body.origem,
+    destino = req.body.destino
+
+  console.log(altura, largura, profundidade, peso, origem, destino)
+
+  res
+    .status(200)
+    .setHeader('Content-Type', 'text/plain')
+    .end(`Altura: ${altura}; Largura:${largura}; Profundidade: ${profundidade}; Peso: ${peso}; Cep de origem: ${origem}; Cep de destino: ${destino}`)
+})
