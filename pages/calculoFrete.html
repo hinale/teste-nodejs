@@ -12,21 +12,24 @@
   <script>
     async function coletarDados () {
       const
-        largura = document.getElementById('largura').value,
-        altura = document.getElementById('altura').value,
-        profundidade = document.getElementById('profundidade').value,
-        peso = document.getElementById('peso').value,
-        origem = document.getElementById('origem').value,
-        destino = document.getElementById('destino').value
+        payload = {
+          largura: document.getElementById('largura').value,
+          altura: document.getElementById('altura').value,
+          profundidade: document.getElementById('profundidade').value,
+          peso: document.getElementById('peso').value,
+          origem: document.getElementById('origem').value,
+          destino: document.getElementById('destino').value
+        }
 
+      const result = await fetch('http://localhost:3000/frete', {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+      })
 
+      const resultJSON = await result.json()
 
-      console.log('largura: ', largura)
-      console.log('altura: ', altura)
-      console.log('profundidade: ', profundidade)
-      console.log('peso: ', peso)
-      console.log('origem: ', origem)
-      console.log('destino: ', destino)
+      console.log(resultJSON)
     }
   </script>
 </head>
@@ -44,52 +47,59 @@
 
     <form action="http://localhost:3000/frete" method="post">
       <div class="row">
-        <div class="col-6">
 
+        <div class="col-6">
           <div class="form-group my-4">
             <label for="altura">Altura:</label>
             <input type="text" class="form-control my-1" name="altura" id="altura" placeholder="Digite a altura(cm)">
           </div>
+        </div>
 
+        <div class="col-6">
+          <div class="form-group my-4">
+            <label for="largura">Largura:</label>
+            <input type="text" class="form-control my-1" name="largura" id="largura" placeholder="Digite a largura(cm)">
+          </div>
+        </div>
+
+        <div class="col-6">
           <div class="form-group my-4">
             <label for="profundidade">Profundidade:</label>
             <input type="text" class="form-control my-1" name="profundidade" id="profundidade"
               placeholder="Digite a profundidade(cm)">
           </div>
-
-          <div class="form-group my-4">
-            <label for="origem">CEP de origem:</label>
-            <input type="text" class="form-control my-1" name="origem" id="origem" placeholder="Digite o CEP de origem">
-          </div>
-
         </div>
 
         <div class="col-6">
-
-          <div class="form-group my-4">
-            <label for="largura">Largura:</label>
-            <input type="text" class="form-control my-1" name="largura" id="largura" placeholder="Digite a largura(cm)">
-          </div>
-
           <div class="form-group my-4">
             <label for="peso">Peso:</label>
             <input type="text" class="form-control my-1" name="peso" id="peso" placeholder="Digite o peso(kg)">
           </div>
+        </div>
 
+        <div class="col-6">
+          <div class="form-group my-4">
+            <label for="origem">CEP de origem:</label>
+            <input type="text" class="form-control my-1" name="origem" id="origem" placeholder="Digite o CEP de origem">
+          </div>
+        </div>
+
+        <div class="col-6">
           <div class="form-group my-4">
             <label for="destino">CEP de destino:</label>
             <input type="text" class="form-control my-1" name="destino" id="destino"
               placeholder="Digite o CEP de destino">
           </div>
-
         </div>
 
         <div class="col-12 text-center">
-          <button type="submit"
+          <button type="button" onclick="coletarDados()"
             class="btn btn-primary btn-block my-4 py-3 px-4 bg-success border-success">Calcular</button>
         </div>
+
       </div>
-    </form>
+  </div>
+  </form>
 
   </div>
 

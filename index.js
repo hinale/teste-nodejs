@@ -95,6 +95,8 @@ app.post('/frete', jsonParser, (req, res) => {
 
   res
     .status(200)
-    .setHeader('Content-Type', 'text/plain')
-    .end(`Altura: ${altura}; Largura:${largura}; Profundidade: ${profundidade}; Peso: ${peso}; Cep de origem: ${origem}; Cep de destino: ${destino}`)
+    .json({
+      success: true,
+      altura, largura, profundidade, peso, origem, destino
+    })
 })

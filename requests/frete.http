@@ -1,0 +1,7 @@
+POST http://localhost:3000/frete HTTP/1.1
+Content-Type: application/json
+
+{
+	"altura": "10",
+	"largura": "10"
+}
