@@ -16,9 +16,8 @@
         url = `http://localhost:3000/endereco/${cep}`,
         resposta = await fetch(url),
         dados = await resposta.json()
-      console.log(dados.status)
 
-      if (dados.status !== 200) {
+      if (resposta.status !== 200) {
         alert('CEP não encontrado')
         return
       } else {

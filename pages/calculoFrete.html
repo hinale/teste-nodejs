@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cálculo de frete</title>
+
+  <!-- CSS BOOTSTRAP -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <script>
+    async function coletarDados () {
+      const
+        payload = {
+          largura: document.getElementById('largura').value,
+          altura: document.getElementById('altura').value,
+          profundidade: document.getElementById('profundidade').value,
+          peso: document.getElementById('peso').value,
+          origem: document.getElementById('origem').value,
+          destino: document.getElementById('destino').value
+        }
+
+      const result = await fetch('http://localhost:3000/frete', {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+      })
+
+      const resultJSON = await result.json()
+
+      console.log(resultJSON)
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center">Cálculo de Frete</h1>
+        <p class="text-center">Informações do pacote</p>
+      </div>
+    </div>
+
+    <form action="http://localhost:3000/frete" method="post">
+      <div class="row">
+
+        <div class="col-6">
+          <div class="form-group my-4">
+            <label for="altura">Altura:</label>
+            <input type="text" class="form-control my-1" name="altura" id="altura" placeholder="Digite a altura(cm)">
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group my-4">
+            <label for="largura">Largura:</label>
+            <input type="text" class="form-control my-1" name="largura" id="largura" placeholder="Digite a largura(cm)">
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group my-4">
+            <label for="profundidade">Profundidade:</label>
+            <input type="text" class="form-control my-1" name="profundidade" id="profundidade"
+              placeholder="Digite a profundidade(cm)">
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group my-4">
+            <label for="peso">Peso:</label>
+            <input type="text" class="form-control my-1" name="peso" id="peso" placeholder="Digite o peso(kg)">
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group my-4">
+            <label for="origem">CEP de origem:</label>
+            <input type="text" class="form-control my-1" name="origem" id="origem" placeholder="Digite o CEP de origem">
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group my-4">
+            <label for="destino">CEP de destino:</label>
+            <input type="text" class="form-control my-1" name="destino" id="destino"
+              placeholder="Digite o CEP de destino">
+          </div>
+        </div>
+
+        <div class="col-12 text-center">
+          <button type="button" onclick="coletarDados()"
+            class="btn btn-primary btn-block my-4 py-3 px-4 bg-success border-success">Calcular</button>
+        </div>
+
+      </div>
+  </div>
+  </form>
+
+  </div>
+
+</body>
+
+</html>
